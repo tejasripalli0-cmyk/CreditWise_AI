@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import logging
+import os
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -18,6 +20,22 @@ MAX_BODY_BYTES = 32_768  # a full 125-field request is well under 10 KB
 
 app = FastAPI(title="CreditWise AI API", version="1.0.0", docs_url="/api/docs", redoc_url=None,
               openapi_url="/api/openapi.json")
+
+
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+    if origin.strip()
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
+)
+
 
 
 def _error(status: int, code: str, message: str, errors: list | None = None) -> JSONResponse:
