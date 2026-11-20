@@ -172,7 +172,7 @@ def _summary(label: str, probability: float, threshold: float, predicted: int, e
     return lines
 
 
-def predict(raw_inputs: dict, explain: bool = True, top_n: int = 10) -> dict:
+def predict(raw_inputs: dict, explain: bool = False, top_n: int = 10) -> dict:
     bundle = get_bundle()
     prepared = prepare_input(raw_inputs, bundle)
 

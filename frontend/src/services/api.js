@@ -48,6 +48,6 @@ export const api = {
   features: () => cached('features', '/api/features'),
   model: () => cached('model', '/api/model'),
   analytics: () => cached('analytics', '/api/analytics'),
-  predict: (inputs, { explain = true, topN = 10 } = {}) =>
+  predict: (inputs, { explain = false, topN = 10 } = {}) =>
     request('/api/predict', { method: 'POST', body: { inputs, explain, top_n: topN } }),
 }

@@ -14,7 +14,7 @@ class PredictRequest(BaseModel):
     inputs: dict[FieldName, Scalar] = Field(
         description="Original model feature names mapped to values. Omit anything you do not know.",
         max_length=125)
-    explain: bool = True
+    explain: bool = False
     top_n: int = Field(10, ge=3, le=25, description="How many features to list in the explanation.")
 
 
