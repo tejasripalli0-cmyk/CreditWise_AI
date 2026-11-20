@@ -1,0 +1,10 @@
+# Runtime dependencies deployed to the Vercel Python function.
+# scikit-learn / numpy / pandas / scipy / joblib match the environment the model was exported from (Colab).
+fastapi==0.115.12
+pydantic==2.14.4
+numpy==2.4.6
+pandas==2.2.3
+scipy==1.16.3
+scikit-learn==1.6.1
+joblib==1.6.0
+shap==0.51.0
