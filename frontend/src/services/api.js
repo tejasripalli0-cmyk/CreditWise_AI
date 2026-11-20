@@ -1,4 +1,5 @@
 // Thin API client. Same-origin: Vite proxies /api in dev, Vercel routes /api/* to the Python function.
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
 const TIMEOUT_MS = 30000 // the first request after idle can wait for a cold start
 
 export class ApiError extends Error {
@@ -14,7 +15,7 @@ async function request(path, { method = 'GET', body, retries = 0 } = {}) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS)
   try {
-    const res = await fetch(path, {
+    const res = await fetch(`${API_BASE_URL}${path}`, {
       method,
       signal: controller.signal,
       headers: body ? { 'Content-Type': 'application/json' } : undefined,
